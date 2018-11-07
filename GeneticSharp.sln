@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticSharp", "GeneticSharp\GeneticSharp.csproj", "{84E85070-4EF3-410F-BA4E-503EE59B438B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticSharp.Tests", "GeneticSharp.Tests\GeneticSharp.Tests.csproj", "{CC428451-3FC7-426D-B872-2588821111D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{84E85070-4EF3-410F-BA4E-503EE59B438B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84E85070-4EF3-410F-BA4E-503EE59B438B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84E85070-4EF3-410F-BA4E-503EE59B438B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC428451-3FC7-426D-B872-2588821111D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC428451-3FC7-426D-B872-2588821111D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC428451-3FC7-426D-B872-2588821111D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC428451-3FC7-426D-B872-2588821111D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
