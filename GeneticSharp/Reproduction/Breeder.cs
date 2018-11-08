@@ -2,7 +2,7 @@
 using System.Linq;
 using GeneticSharp.Helpers;
 
-namespace GeneticSharp.Breeding
+namespace GeneticSharp.Reproduction
 {
     public class Breeder
     {

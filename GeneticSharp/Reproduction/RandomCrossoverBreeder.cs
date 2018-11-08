@@ -4,7 +4,7 @@ using AutoBuilder;
 using GeneticSharp.Extensions;
 using GeneticSharp.Helpers;
 
-namespace GeneticSharp.Breeding
+namespace GeneticSharp.Reproduction
 {
     public class RandomCrossoverBreeder<T> where T : class, new()
     {

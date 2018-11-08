@@ -4,30 +4,16 @@ using Xunit.Abstractions;
 
 namespace GeneticSharp.Tests
 {
-    public class SimpleMathTest
+    public class SimpleMathTest: UnitTestBase
     {
-        private readonly ITestOutputHelper _output;
-
-        public SimpleMathTest(ITestOutputHelper output)
+        public SimpleMathTest(ITestOutputHelper output) : base(output)
         {
-            _output = output;
         }
 
         [Fact]
         public void Test1()
         {
-            var geneticEvolution = new GeneticEvolution<SimpleMathModel>();
-            for (int i = 0; i < 50; i++)
-            {
-                var result = geneticEvolution.Evolve();
-                _output.WriteLine($"Gen. : #{geneticEvolution.CurrentGeneration.Number}");
-                _output.WriteLine($"Best : {result.BestIndividual}");
-                _output.WriteLine($"Avg  : {result.AverageIndividual}");
-                _output.WriteLine($"Worst: {result.WorstIndividual}");
-                _output.WriteLine($"------------------------------");
-                _output.WriteLine($"Avg.Fitness: {result.AverageFitness}%");
-                _output.WriteLine("");
-            }
+            Evolve<SimpleMathModel>();
         }
     }
 

@@ -4,32 +4,17 @@ using Xunit.Abstractions;
 
 namespace GeneticSharp.Tests
 {
-    public class ActivateBitTest
+    public class ActivateBitTest : UnitTestBase
     {
-        private readonly ITestOutputHelper _output;
-
-        public ActivateBitTest(ITestOutputHelper output)
+        public ActivateBitTest(ITestOutputHelper output) : base(output)
         {
-            _output = output;
         }
 
         [Fact]
         public void Test1()
         {
-            var options = new EvolutionOptions() { CollectionTypesSizes = 8 };
-            var geneticEvolution = new GeneticEvolution<ActivateBitModel>(options);
-
-            for (int i = 0; i < 50; i++)
-            {
-                var result = geneticEvolution.Evolve();
-                _output.WriteLine($"Gen. : #{geneticEvolution.CurrentGeneration.Number}");
-                _output.WriteLine($"Best : {result.BestIndividual}");
-                _output.WriteLine($"Avg  : {result.AverageIndividual}");
-                _output.WriteLine($"Worst: {result.WorstIndividual}");
-                _output.WriteLine($"------------------------------");
-                _output.WriteLine($"Avg.Fitness: {result.AverageFitness}%");
-                _output.WriteLine("");
-            }
+            var options = new EvolutionOptions { CollectionTypesSizes = 8 };
+            Evolve<ActivateBitModel>(options: options);
         }
     }
 
