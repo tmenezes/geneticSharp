@@ -1,5 +1,6 @@
 using System.Linq;
 using AutoBuilder;
+using GeneticSharp.Extensions;
 
 namespace GeneticSharp
 {
@@ -17,7 +18,7 @@ namespace GeneticSharp
 
         internal static Generation<T> GenerateRandomly(EvolutionOptions options)
         {
-            var builder = new Builder<T>();
+            var builder = options.GenerateBuilder<T>();
             var individuals = Enumerable.Range(0, options.GenerationQuantity).Select(_ => builder.Build()).ToList();
 
             return new Generation<T>(1, new Population<T>(individuals));

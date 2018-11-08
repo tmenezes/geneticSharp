@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace GeneticSharp.Tests
 {
-    public class UnitTest2
+    public class ActivateBitTest
     {
         private readonly ITestOutputHelper _output;
 
-        public UnitTest2(ITestOutputHelper output)
+        public ActivateBitTest(ITestOutputHelper output)
         {
             _output = output;
         }
@@ -18,7 +16,9 @@ namespace GeneticSharp.Tests
         [Fact]
         public void Test1()
         {
-            var geneticEvolution = new GeneticEvolution<ActivateBitModel>();
+            var options = new EvolutionOptions() { CollectionTypesSizes = 8 };
+            var geneticEvolution = new GeneticEvolution<ActivateBitModel>(options);
+
             for (int i = 0; i < 50; i++)
             {
                 var result = geneticEvolution.Evolve();
@@ -27,7 +27,7 @@ namespace GeneticSharp.Tests
                 _output.WriteLine($"Avg  : {result.AverageIndividual}");
                 _output.WriteLine($"Worst: {result.WorstIndividual}");
                 _output.WriteLine($"------------------------------");
-                _output.WriteLine($"Avg.Fitnes: {result.AverageFitness}%");
+                _output.WriteLine($"Avg.Fitness: {result.AverageFitness}%");
                 _output.WriteLine("");
             }
         }
@@ -37,17 +37,10 @@ namespace GeneticSharp.Tests
     {
         private decimal _fitness = 0;
 
+        // demo of working with property or Collection (Arrays, ILists) property
         public bool Bit0 { get; set; }
         public bool Bit1 { get; set; }
-        public bool Bit2 { get; set; }
-        public bool Bit3 { get; set; }
-        public bool Bit4 { get; set; }
-        public bool Bit5 { get; set; }
-        public bool Bit6 { get; set; }
-        public bool Bit7 { get; set; }
-        public bool Bit8 { get; set; }
-        public bool Bit9 { get; set; }
-
+        public bool[] Bit { get; set; }
 
         public decimal Fitness => _fitness;
 
@@ -55,21 +48,14 @@ namespace GeneticSharp.Tests
         {
             _fitness += Bit0 ? 10 : 0;
             _fitness += Bit1 ? 10 : 0;
-            _fitness += Bit2 ? 10 : 0;
-            _fitness += Bit3 ? 10 : 0;
-            _fitness += Bit4 ? 10 : 0;
-            _fitness += Bit5 ? 10 : 0;
-            _fitness += Bit6 ? 10 : 0;
-            _fitness += Bit7 ? 10 : 0;
-            _fitness += Bit8 ? 10 : 0;
-            _fitness += Bit9 ? 10 : 0;
+            _fitness += Bit.Count(i => i) * 10; // how many activated bits
         }
 
         public override string ToString()
         {
-            char P(bool b) => b ? '1' : '0';
+            string P(bool b) => b ? "1" : "0";
 
-            return $"{nameof(Fitness)}: {Fitness}%: {P(Bit0)}{P(Bit1)}{P(Bit2)}{P(Bit3)}{P(Bit4)}{P(Bit5)}{P(Bit6)}{P(Bit7)}{P(Bit8)}{P(Bit9)}";
+            return $"{nameof(Fitness)}: {Fitness}%: {P(Bit0)}{P(Bit1)}{Bit.Select(P).Aggregate((one, two) => $"{one}{two}")}";
         }
     }
 }

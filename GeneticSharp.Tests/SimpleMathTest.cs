@@ -4,11 +4,11 @@ using Xunit.Abstractions;
 
 namespace GeneticSharp.Tests
 {
-    public class UnitTest1
+    public class SimpleMathTest
     {
         private readonly ITestOutputHelper _output;
 
-        public UnitTest1(ITestOutputHelper output)
+        public SimpleMathTest(ITestOutputHelper output)
         {
             _output = output;
         }
@@ -25,7 +25,7 @@ namespace GeneticSharp.Tests
                 _output.WriteLine($"Avg  : {result.AverageIndividual}");
                 _output.WriteLine($"Worst: {result.WorstIndividual}");
                 _output.WriteLine($"------------------------------");
-                _output.WriteLine($"Avg.Fitnes: {result.AverageFitness}%");
+                _output.WriteLine($"Avg.Fitness: {result.AverageFitness}%");
                 _output.WriteLine("");
             }
         }
@@ -36,7 +36,7 @@ namespace GeneticSharp.Tests
         private decimal _fitness = 0;
         public enum SimpleMathOperation
         {
-            Sum, Subtract, Divid, Multiply
+            Sum, Subtract, Divide, Multiply
         }
 
         public int Number1 { get; set; }
@@ -44,7 +44,6 @@ namespace GeneticSharp.Tests
         public SimpleMathOperation Operation { get; set; }
         public bool KnowsNumber1 { get; set; }
         public bool KnowsNumber2 { get; set; }
-
 
         public decimal Fitness => _fitness;
 
@@ -57,16 +56,15 @@ namespace GeneticSharp.Tests
             {
                 case SimpleMathOperation.Sum: result = n1 + n2; break;
                 case SimpleMathOperation.Subtract: result = n1 - n2; break;
-                case SimpleMathOperation.Divid: result = n1 / (n2 == 0 ? 1 : n2); break;
+                case SimpleMathOperation.Divide: result = n1 / (n2 == 0 ? 1 : n2); break;
                 case SimpleMathOperation.Multiply: result = n1 * n2; break;
             }
 
-            _fitness += Operation == SimpleMathOperation.Sum ? 30 : 0;
-            _fitness += KnowsNumber1 ? 20 : 0;
-            _fitness += KnowsNumber2 ? 20 : 0;
-            _fitness += Number1 < 100 ? 10 : 0;
-            _fitness += Number2 < 100 ? 10 : 0;
-            _fitness += result < 1000 ? result < 500 ? 10 : 5 : 0;
+            var expectedResult = (long)Number1 + Number2;
+            var diff = Math.Abs(expectedResult - result);
+
+            var adjustedValue = int.MaxValue - diff;
+            _fitness = adjustedValue * 100 / int.MaxValue;
         }
 
         public override string ToString()

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using GeneticSharp.Helpers;
 
 namespace GeneticSharp.Breeding
@@ -11,7 +9,7 @@ namespace GeneticSharp.Breeding
         public static Population<T> Breed<T>(Population<T> population, EvolutionOptions options) where T : class, IEvolutionaryIndividual, new()
         {
             var newIndividuals = new List<T>();
-            var breeder = new RandomCrossoverBreeder<T>();
+            var breeder = new RandomCrossoverBreeder<T>(options);
 
             var orderedPopulation = population.OrderByDescending(i => i.Fitness).ToList();
 
