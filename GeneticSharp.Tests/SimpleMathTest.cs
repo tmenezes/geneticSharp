@@ -4,7 +4,7 @@ using Xunit.Abstractions;
 
 namespace GeneticSharp.Tests
 {
-    public class SimpleMathTest: UnitTestBase
+    public class SimpleMathTest : UnitTestBase
     {
         public SimpleMathTest(ITestOutputHelper output) : base(output)
         {
