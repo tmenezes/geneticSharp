@@ -2,10 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>Tmenezes</Authors>
+    <Description>GeneticSharp is a library that handles the mecanics of a generic algorithm implementation. It automatically creates the population, the reproduction and mutation phases.</Description>
+    <RepositoryUrl>https://github.com/tmenezes/geneticSharp</RepositoryUrl>
+    <PackageTags>geneticAlgorithm, GA, AI</PackageTags>
+    <PackageProjectUrl>https://github.com/tmenezes/geneticSharp</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoBuilderCore" Version="1.0.3" />
+    <PackageReference Include="AutoBuilderCore" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

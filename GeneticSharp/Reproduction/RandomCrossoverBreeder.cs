@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Reflection;
 using AutoBuilder;
+using AutoBuilder.Helpers;
 using GeneticSharp.Extensions;
 using GeneticSharp.Helpers;
 

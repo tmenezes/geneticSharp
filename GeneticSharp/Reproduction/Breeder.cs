@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GeneticSharp.Helpers;
+using AutoBuilder.Helpers;
 
 namespace GeneticSharp.Reproduction
 {
@@ -13,7 +13,7 @@ namespace GeneticSharp.Reproduction
 
             var orderedPopulation = population.OrderByDescending(i => i.Fitness).ToList();
 
-            while (newIndividuals.Count != options.GenerationQuantity)
+            while (newIndividuals.Count != options.PopulationSize)
             {
                 foreach (var individual in orderedPopulation)
                 {
@@ -21,7 +21,7 @@ namespace GeneticSharp.Reproduction
                     var newIndividual = breeder.Breed(individual, partner);
 
                     newIndividuals.Add(newIndividual);
-                    if (newIndividuals.Count == options.GenerationQuantity)
+                    if (newIndividuals.Count == options.PopulationSize)
                         break;
                 }
             }

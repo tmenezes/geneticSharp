@@ -19,7 +19,7 @@ namespace GeneticSharp
         internal static Generation<T> GenerateRandomly(EvolutionOptions options)
         {
             var builder = options.GenerateBuilder<T>();
-            var individuals = Enumerable.Range(0, options.GenerationQuantity).Select(_ => builder.Build()).ToList();
+            var individuals = Enumerable.Range(0, options.PopulationSize).Select(_ => builder.Build()).ToList();
 
             return new Generation<T>(1, new Population<T>(individuals));
         }

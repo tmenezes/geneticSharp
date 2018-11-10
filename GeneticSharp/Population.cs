@@ -18,7 +18,7 @@ namespace GeneticSharp
 
         internal Population<T> ApplyNaturalSelection(EvolutionOptions options)
         {
-            var naturalSelectedCount = (int)(options.GenerationQuantity * options.NaturalSelectionRate);
+            var naturalSelectedCount = (int)(options.PopulationSize * options.NaturalSelectionRate);
 
             _individuals.ToList().ForEach(i => i.CalculateFitness());
 

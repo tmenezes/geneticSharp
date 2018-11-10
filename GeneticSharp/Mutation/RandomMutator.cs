@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoBuilder;
+using AutoBuilder.Helpers;
 using GeneticSharp.Extensions;
 using GeneticSharp.Helpers;
 
