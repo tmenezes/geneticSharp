@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using GeneticSharp.Selection;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -6,15 +7,24 @@ namespace GeneticSharp.Tests
 {
     public class ActivateBitTest : UnitTestBase
     {
+        private readonly ITestOutputHelper _output;
+
         public ActivateBitTest(ITestOutputHelper output) : base(output)
         {
+            _output = output;
         }
 
         [Fact]
         public void Test1()
         {
-            var options = new EvolutionOptions { CollectionTypesSizes = 8 };
-            Evolve<ActivateBitModel>(options: options);
+            _output.WriteLine("Elite selection");
+            var options1 = new EvolutionOptions { CollectionTypesSizes = 8 };
+            Evolve<ActivateBitModel>(options: options1, generationsCount: 10);
+
+            _output.WriteLine("");
+            _output.WriteLine("Proportional selection");
+            var options2 = new EvolutionOptions { NaturalSelectionType = NaturalSelectionTypes.ProportionalSelection, CollectionTypesSizes = 8 };
+            Evolve<ActivateBitModel>(options: options2, generationsCount: 10);
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GeneticSharp.Mutation;
 using GeneticSharp.Reproduction;
+using GeneticSharp.Selection;
 
 namespace GeneticSharp
 {
@@ -18,14 +19,13 @@ namespace GeneticSharp
 
         internal Population<T> ApplyNaturalSelection(EvolutionOptions options)
         {
-            var naturalSelectedCount = (int)(options.PopulationSize * options.NaturalSelectionRate);
-
             _individuals.ToList().ForEach(i => i.CalculateFitness());
 
-            var bestIndividuals = _individuals.OrderByDescending(i => i.Fitness);
-            var naturalSelected = bestIndividuals.Take(naturalSelectedCount).ToList();
+            var selector = options.NaturalSelectionType == NaturalSelectionTypes.EliteSelection
+                    ? new EliteSelection<T>(options.NaturalSelectionRate)
+                    : new ProportionalSelection<T>(options.NaturalSelectionRate) as INaturalSelection<T>;
 
-            return new Population<T>(naturalSelected);
+            return selector.Select(this);
         }
 
         internal Population<T> Breed(EvolutionOptions options)
