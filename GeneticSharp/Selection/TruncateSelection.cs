@@ -2,11 +2,11 @@
 
 namespace GeneticSharp.Selection
 {
-    public class EliteSelection<T> : INaturalSelection<T> where T : class, IEvolutionaryIndividual, new()
+    public class TruncateSelection<T> : INaturalSelection<T> where T : class, IEvolutionaryIndividual, new()
     {
         private readonly double _naturalSelectionRate;
 
-        public EliteSelection(double naturalSelectionRate = ConstantValues.NaturalSelectionRate)
+        public TruncateSelection(double naturalSelectionRate = ConstantValues.NaturalSelectionRate)
         {
             _naturalSelectionRate = naturalSelectionRate;
         }

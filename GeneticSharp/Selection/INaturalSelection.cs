@@ -10,7 +10,7 @@
         /// <summary>
         /// Selects the best individuals, no repetition is allowed.
         /// </summary>
-        Elite,
+        Truncate,
 
         /// <summary>
         /// Selects individuals based on its Fitness. Can reduce variability by because it allows individuals to be selected more than one time.

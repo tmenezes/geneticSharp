@@ -18,7 +18,7 @@ namespace GeneticSharp.Tests
         [Fact]
         public void Test1()
         {
-            _output.WriteLine("Elite selection");
+            _output.WriteLine("Truncate selection");
             var options1 = new EvolutionOptions { CollectionSize = 8 };
             Evolve<ActivateBitModel>(options: options1, generationsCount: 10);
 
@@ -28,12 +28,12 @@ namespace GeneticSharp.Tests
             Evolve<ActivateBitModel>(options: options2, generationsCount: 10);
 
             _output.WriteLine("\n-----------------------\n");
-            _output.WriteLine("Elite + Single-Point Crossover");
-            var options3 = new EvolutionOptions { CollectionSize = 8, Crossover = CrossoverTypes.SinglePoint};
+            _output.WriteLine("Truncate + Single-Point Crossover");
+            var options3 = new EvolutionOptions { CollectionSize = 8, Crossover = CrossoverTypes.SinglePoint };
             Evolve<ActivateBitModel>(options: options3, generationsCount: 10);
 
             _output.WriteLine("\n-----------------------\n");
-            _output.WriteLine("Elite + Slice Crossover");
+            _output.WriteLine("Truncate + Slice Crossover");
             var options4 = new EvolutionOptions { CollectionSize = 8, Crossover = CrossoverTypes.Slice };
             Evolve<ActivateBitModel>(options: options4, generationsCount: 10);
         }
