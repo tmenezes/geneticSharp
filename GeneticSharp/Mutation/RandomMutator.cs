@@ -55,7 +55,7 @@ namespace GeneticSharp.Mutation
             {
                 if (ReflectionHelper.IsCollection(prop.PropertyType))
                 {
-                    props.AddRange(Enumerable.Range(0, _options.CollectionTypesSizes - 1).Select(_ => prop));
+                    props.AddRange(Enumerable.Range(0, _options.CollectionSize - 1).Select(_ => prop));
                 }
             }
 

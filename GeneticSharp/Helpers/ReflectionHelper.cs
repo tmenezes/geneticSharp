@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using AutoBuilder;
@@ -7,19 +8,15 @@ namespace GeneticSharp.Helpers
 {
     public static class ReflectionHelper
     {
-        private static readonly Dictionary<Type, bool> _isCollection = new Dictionary<Type, bool>();
+        private static readonly ConcurrentDictionary<Type, bool> _isCollection = new ConcurrentDictionary<Type, bool>();
 
         public static IEnumerable<PropertyInfo> GetProperties<T>()
         {
             return TypeManager.GetProperties(typeof(T));
         }
 
-        public static bool IsCollection(Type type)
-        {
-            if (!_isCollection.ContainsKey(type))
-                _isCollection[type] = TypeManager.IsCollection(type);
+        public static bool IsCollection(PropertyInfo property) => IsCollection(property.PropertyType);
 
-            return _isCollection[type];
-        }
+        public static bool IsCollection(Type type) => _isCollection.GetOrAdd(type, TypeManager.IsCollection);
     }
 }

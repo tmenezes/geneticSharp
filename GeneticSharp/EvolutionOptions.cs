@@ -11,7 +11,7 @@ namespace GeneticSharp
 
         public double MutationRate { get; set; } = 0.01;
 
-        public int CollectionTypesSizes { get; set; } = 5;
+        public int CollectionSize { get; set; } = 10;
         public int MinNumberValue { get; set; } = 0;
         public int MaxNumberValue { get; set; } = int.MaxValue;
 

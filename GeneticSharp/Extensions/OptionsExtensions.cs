@@ -6,7 +6,7 @@ namespace GeneticSharp.Extensions
     {
         internal static Builder<T> GenerateBuilder<T>(this EvolutionOptions options) where T : class, new()
         {
-            return new Builder<T>().WithCollectionDegree(options.CollectionTypesSizes)
+            return new Builder<T>().WithCollectionDegree(options.CollectionSize)
                                    .WithMinNumberValueOf(options.MinNumberValue)
                                    .WithMaxNumberValueOf(options.MaxNumberValue);
         }

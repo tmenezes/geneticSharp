@@ -20,7 +20,7 @@ namespace GeneticSharp.Tests
                 PopulationSize = 300,
                 NaturalSelectionRate = 0.5,
                 MutationRate = 0.01,
-                CollectionTypesSizes = FindSecretSentenceModel.SECRET.Length,
+                CollectionSize = FindSecretSentenceModel.SECRET.Length,
                 MinNumberValue = 32, // ascii table start
                 MaxNumberValue = 126 // ascii table end
             };

@@ -18,12 +18,12 @@ namespace GeneticSharp.Tests
         public void Test1()
         {
             _output.WriteLine("Elite selection");
-            var options1 = new EvolutionOptions { CollectionTypesSizes = 8 };
+            var options1 = new EvolutionOptions { CollectionSize = 8 };
             Evolve<ActivateBitModel>(options: options1, generationsCount: 10);
 
             _output.WriteLine("");
             _output.WriteLine("Proportional selection");
-            var options2 = new EvolutionOptions { NaturalSelectionType = NaturalSelectionTypes.ProportionalSelection, CollectionTypesSizes = 8 };
+            var options2 = new EvolutionOptions { NaturalSelectionType = NaturalSelectionTypes.ProportionalSelection, CollectionSize = 8 };
             Evolve<ActivateBitModel>(options: options2, generationsCount: 10);
         }
     }
