@@ -14,30 +14,7 @@ namespace GeneticSharp
         public Population(IEnumerable<T> individuals)
         {
             _individuals = individuals;
-        }
-
-
-        internal Population<T> ApplyNaturalSelection(EvolutionOptions options)
-        {
-            _individuals.ToList().ForEach(i => i.CalculateFitness());
-
-            var selector = options.NaturalSelectionType == NaturalSelectionTypes.EliteSelection
-                    ? new EliteSelection<T>(options.NaturalSelectionRate)
-                    : new ProportionalSelection<T>(options.NaturalSelectionRate) as INaturalSelection<T>;
-
-            return selector.Select(this);
-        }
-
-        internal Population<T> Breed(EvolutionOptions options)
-        {
-            return Breeder.Breed(this, options);
-        }
-
-        internal Population<T> Mutate(EvolutionOptions options)
-        {
-            return Mutator.Mutate(this, options);
-        }
-
+        }       
 
         public T GetBest() => _individuals.OrderByDescending(i => i.Fitness).First();
         public T GetWorst() => _individuals.OrderBy(i => i.Fitness).First();

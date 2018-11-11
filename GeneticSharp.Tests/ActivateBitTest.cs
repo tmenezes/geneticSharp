@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using GeneticSharp.Reproduction;
 using GeneticSharp.Selection;
 using Xunit;
 using Xunit.Abstractions;
@@ -21,10 +22,20 @@ namespace GeneticSharp.Tests
             var options1 = new EvolutionOptions { CollectionSize = 8 };
             Evolve<ActivateBitModel>(options: options1, generationsCount: 10);
 
-            _output.WriteLine("");
+            _output.WriteLine("\n-----------------------\n");
             _output.WriteLine("Proportional selection");
-            var options2 = new EvolutionOptions { NaturalSelectionType = NaturalSelectionTypes.ProportionalSelection, CollectionSize = 8 };
+            var options2 = new EvolutionOptions { NaturalSelection = SelectionTypes.Proportional, CollectionSize = 8 };
             Evolve<ActivateBitModel>(options: options2, generationsCount: 10);
+
+            _output.WriteLine("\n-----------------------\n");
+            _output.WriteLine("Elite + Single-Point Crossover");
+            var options3 = new EvolutionOptions { CollectionSize = 8, Crossover = CrossoverTypes.SinglePoint};
+            Evolve<ActivateBitModel>(options: options3, generationsCount: 10);
+
+            _output.WriteLine("\n-----------------------\n");
+            _output.WriteLine("Elite + Slice Crossover");
+            var options4 = new EvolutionOptions { CollectionSize = 8, Crossover = CrossoverTypes.Slice };
+            Evolve<ActivateBitModel>(options: options4, generationsCount: 10);
         }
     }
 

@@ -1,3 +1,4 @@
+using GeneticSharp.Reproduction;
 using GeneticSharp.Selection;
 
 namespace GeneticSharp
@@ -7,7 +8,9 @@ namespace GeneticSharp
         public int PopulationSize { get; set; } = 100;
 
         public double NaturalSelectionRate { get; set; } = 0.75; // set percentage of the population that will not "die"
-        public NaturalSelectionTypes NaturalSelectionType { get; set; } = NaturalSelectionTypes.EliteSelection;
+        public SelectionTypes NaturalSelection { get; set; } = SelectionTypes.Elite;
+
+        public CrossoverTypes Crossover { get; set; } = CrossoverTypes.Uniform;
 
         public double MutationRate { get; set; } = 0.01;
 

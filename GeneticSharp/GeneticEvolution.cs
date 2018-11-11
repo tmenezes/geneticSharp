@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using GeneticSharp.Mutation;
+using GeneticSharp.Reproduction;
+using GeneticSharp.Selection;
 
 namespace GeneticSharp
 {
@@ -24,18 +28,43 @@ namespace GeneticSharp
             _generations.Add(CurrentGeneration);
         }
 
-
+        // main method
         public EvolutionResult<T> Evolve()
         {
             SwitchGenerations();
 
-            var naturalSelected = CurrentGeneration.Population.ApplyNaturalSelection(_options);
+            // perform evolution
+            var naturalSelected = Select(CurrentGeneration.Population);
+            var newIndividuals = Reproduce(naturalSelected);
+            var nextPopulation = Mutate(newIndividuals);
 
             // prepare next generation
-            var nextPopulation = naturalSelected.Breed(_options).Mutate(_options);
             NextGeneration = new Generation<T>(CurrentGeneration.Number + 1, nextPopulation);
 
+            // result of current generation
             return new EvolutionResult<T>(CurrentGeneration);
+        }
+
+        // privates
+        private Population<T> Select(Population<T> population)
+        {
+            population.ToList().ForEach(i => i.CalculateFitness());
+
+            var selector = _options.NaturalSelection == SelectionTypes.Elite
+                    ? new EliteSelection<T>(_options.NaturalSelectionRate)
+                    : new ProportionalSelection<T>(_options.NaturalSelectionRate) as INaturalSelection<T>;
+
+            return selector.Select(population);
+        }
+
+        private Population<T> Reproduce(Population<T> population)
+        {
+            return Breeder.Breed(population, _options);
+        }
+
+        private Population<T> Mutate(Population<T> population)
+        {
+            return Mutator.Mutate(population, _options);
         }
 
         private void SwitchGenerations()

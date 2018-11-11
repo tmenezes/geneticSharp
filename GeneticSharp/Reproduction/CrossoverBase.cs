@@ -7,6 +7,24 @@ using GeneticSharp.Helpers;
 
 namespace GeneticSharp.Reproduction
 {
+    public enum CrossoverTypes
+    {
+        /// <summary>
+        /// Performs crossover by randomly selecting each chromosome from the parent A or B
+        /// </summary>
+        Uniform,
+
+        /// <summary>
+        /// Defines one cut point between the number of chromosomes and pickup one side from parent A, then the other from parent B
+        /// </summary>
+        SinglePoint,
+
+        /// <summary>
+        /// Defines two cut points representing a DNA slice of parent B, then uses everything else from parent A
+        /// </summary>
+        Slice
+    }
+
     public abstract class CrossoverBase<T> where T : class, new()
     {
         protected readonly Builder<T> Builder;
