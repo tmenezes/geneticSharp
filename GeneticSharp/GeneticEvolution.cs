@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GeneticSharp.Mutation;
 using GeneticSharp.Reproduction;
@@ -43,6 +44,25 @@ namespace GeneticSharp
 
             // result of current generation
             return new EvolutionResult<T>(CurrentGeneration);
+        }
+
+        public IEnumerable<EvolutionResult<T>> EvolveUntil(Func<EvolutionResult<T>, bool> stopCondition, Func<EvolutionResult<T>, bool> onGenerationProcessed = null)
+        {
+            var allResults = new List<EvolutionResult<T>>();
+            var result = default(EvolutionResult<T>);
+
+            do
+            {
+                result = Evolve();
+                allResults.Add(result);
+
+                var shouldContinue = onGenerationProcessed?.Invoke(result) ?? true;
+                if (!shouldContinue)
+                    break;
+            }
+            while (!stopCondition.Invoke(result));
+
+            return allResults;
         }
 
         // privates

@@ -24,7 +24,10 @@ namespace GeneticSharp.Tests
                 MinNumberValue = 32, // ascii table start
                 MaxNumberValue = 126 // ascii table end
             };
-            Evolve<FindSecretSentenceModel>(options: options, generationsCount: 100);
+            Evolve<FindSecretSentenceModel>(options: options, stopCondition: r =>
+            {
+                return r.BestIndividual.Fitness == 100; // stop when achieve 100% fitness
+            }); 
         }
     }
 
