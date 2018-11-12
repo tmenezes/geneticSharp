@@ -10,12 +10,12 @@ namespace GeneticSharp.Reproduction
     public enum CrossoverTypes
     {
         /// <summary>
-        /// Performs crossover by randomly selecting each chromosome from the parent A or B
+        /// Performs crossover by randomly selecting each gene from the parent A or B
         /// </summary>
         Uniform,
 
         /// <summary>
-        /// Defines one cut point between the number of chromosomes and pickup one side from parent A, then the other from parent B
+        /// Defines one cut point between the number of genes and pickup one side from parent A, then the other from parent B
         /// </summary>
         SinglePoint,
 
@@ -39,48 +39,48 @@ namespace GeneticSharp.Reproduction
         public virtual T Produce(T a, T b)
         {
             var newIndividual = new T();
-            var chromosomes = ReflectionHelper.GetProperties<T>().ToList();
+            var genes = ReflectionHelper.GetProperties<T>().ToList();
 
-            for (var i = 0; i < chromosomes.Count; i++)
+            for (var i = 0; i < genes.Count; i++)
             {
-                var chromosome = chromosomes[i];
+                var gene = genes[i];
                 var value = default(object);
 
-                if (ReflectionHelper.IsCollection(chromosome.PropertyType))
+                if (ReflectionHelper.IsCollection(gene.PropertyType))
                 {
-                    value = SetChromosomeCollectionValue(chromosome, i, a, b);
+                    value = SetGeneCollectionValue(gene, i, a, b);
                 }
                 else
                 {
-                    var giver = ChooseChromosomeGiver(chromosome, i, a, b);
-                    value = chromosome.GetValue(giver);
+                    var giver = ChooseGeneGiver(gene, i, a, b);
+                    value = gene.GetValue(giver);
                 }
 
-                chromosome.SetValue(newIndividual, value);
+                gene.SetValue(newIndividual, value);
             }
 
             return newIndividual;
         }
 
         // customizations
-        protected abstract T ChooseChromosomeGiver(PropertyInfo chromosome, int index, T parentA, T parentB);
+        protected abstract T ChooseGeneGiver(PropertyInfo gene, int index, T parentA, T parentB);
 
         // helpers & privates
-        protected object GetChromosomeNewValue(PropertyInfo chromosome)
+        protected object GetGeneNewValue(PropertyInfo gene)
         {
             var newGuy = Builder.Build();
-            return chromosome.GetValue(newGuy);
+            return gene.GetValue(newGuy);
         }
 
-        private object SetChromosomeCollectionValue(PropertyInfo chromosome, int index, T parentA, T parentB)
+        private object SetGeneCollectionValue(PropertyInfo gene, int index, T parentA, T parentB)
         {
-            var collectionValue = GetChromosomeNewValue(chromosome) as IList;
-            var valueParentA = chromosome.GetValue(parentA) as IList;
-            var valueParentB = chromosome.GetValue(parentB) as IList;
+            var collectionValue = GetGeneNewValue(gene) as IList;
+            var valueParentA = gene.GetValue(parentA) as IList;
+            var valueParentB = gene.GetValue(parentB) as IList;
 
             for (var i = 0; i < collectionValue.Count; i++)
             {
-                var parent = ChooseChromosomeGiver(chromosome, index + i, parentA, parentB);
+                var parent = ChooseGeneGiver(gene, index + i, parentA, parentB);
                 var giver = parent == parentA ? valueParentA : valueParentB;
 
                 collectionValue[i] = giver[i];

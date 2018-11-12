@@ -8,7 +8,7 @@ namespace GeneticSharp.Reproduction
         {
         }
 
-        protected override T ChooseChromosomeGiver(PropertyInfo chromosome, int index, T parentA, T parentB)
+        protected override T ChooseGeneGiver(PropertyInfo gene, int index, T parentA, T parentB)
         {
             var crossoverPoints = GetCrossoverPoint(parentA, parentB);
             return index <= crossoverPoints[0] || index > crossoverPoints[1] ? parentA : parentB;

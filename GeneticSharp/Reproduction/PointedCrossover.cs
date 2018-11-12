@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using AutoBuilder.Helpers;
 using GeneticSharp.Helpers;
@@ -12,14 +11,14 @@ namespace GeneticSharp.Reproduction
         private readonly ConcurrentDictionary<int, int[]> _parentsCrossoverPoint = new ConcurrentDictionary<int, int[]>();
 
         protected readonly int CutPoints;
-        protected readonly int ChromosomesCount;
+        protected readonly int GenesCount;
 
         protected PointedCrossover(EvolutionOptions options, int cutPoints = 1) : base(options)
         {
             CutPoints = cutPoints;
-            ChromosomesCount = CalculateChromosomeCount(options.CollectionSize);
+            GenesCount = CalculateGenesCount(options.CollectionSize);
 
-            if (ChromosomesCount <= cutPoints)
+            if (GenesCount <= cutPoints)
                 throw new InvalidOperationException($"It is not possible to split the current model data using {cutPoints} cut points.");
         }
 
@@ -34,7 +33,7 @@ namespace GeneticSharp.Reproduction
                 for (int i = 0; i < CutPoints; i++)
                 {
                     var otherPointsCount = CutPoints - (i + 1);
-                    points[i] = RandomData.GetInt(previousPoint + 1, ChromosomesCount - otherPointsCount - 2);
+                    points[i] = RandomData.GetInt(previousPoint + 1, GenesCount - otherPointsCount - 2);
                     previousPoint = points[i];
                 }
 
@@ -50,7 +49,7 @@ namespace GeneticSharp.Reproduction
             return hash;
         }
 
-        private static int CalculateChromosomeCount(int collectionSize)
+        private static int CalculateGenesCount(int collectionSize)
         {
             var properties = ReflectionHelper.GetProperties<T>();
             var collectionCount = properties.Count(ReflectionHelper.IsCollection);
@@ -58,6 +57,5 @@ namespace GeneticSharp.Reproduction
 
             return regularPropsCount + collectionCount * collectionSize;
         }
-
     }
 }

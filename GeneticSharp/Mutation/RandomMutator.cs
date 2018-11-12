@@ -22,29 +22,29 @@ namespace GeneticSharp.Mutation
 
         public void Mutate(T a)
         {
-            var chromosomes = GetPropertiesWithCollectionsProportional();
+            var genes = GetPropertiesWithCollectionsProportional();
 
-            var chromosomesToChange = _options.MutationRate * chromosomes.Count;
-            chromosomesToChange = chromosomesToChange <= 0 ? 1 : chromosomesToChange;
+            var genesToChange = _options.MutationRate * genes.Count;
+            genesToChange = genesToChange <= 0 ? 1 : genesToChange;
 
-            for (int i = 0; i < chromosomesToChange; i++)
+            for (int i = 0; i < genesToChange; i++)
             {
-                var chromosome = chromosomes[RandomData.GetInt(chromosomes.Count)];
+                var gene = genes[RandomData.GetInt(genes.Count)];
 
-                if (ReflectionHelper.IsCollection(chromosome.PropertyType))
+                if (ReflectionHelper.IsCollection(gene.PropertyType))
                 {
-                    var collectionValue = chromosome.GetValue(a) as IList;
-                    var newCollectionValue = GetChromosomeNewValue(chromosome) as IList;
+                    var collectionValue = gene.GetValue(a) as IList;
+                    var newCollectionValue = GetGeneNewValue(gene) as IList;
 
                     var randomGenIndex = RandomData.GetInt(collectionValue.Count);
                     collectionValue[randomGenIndex] = newCollectionValue[randomGenIndex];
                 }
                 else
                 {
-                    chromosome.SetValue(a, GetChromosomeNewValue(chromosome));
+                    gene.SetValue(a, GetGeneNewValue(gene));
                 }
 
-                chromosomes.Remove(chromosome);
+                genes.Remove(gene);
             }
         }
 
@@ -62,10 +62,10 @@ namespace GeneticSharp.Mutation
             return props;
         }
 
-        private object GetChromosomeNewValue(PropertyInfo chromosome)
+        private object GetGeneNewValue(PropertyInfo gene)
         {
             var newGuy = _builder.Build();
-            return chromosome.GetValue(newGuy);
+            return gene.GetValue(newGuy);
         }
     }
 }

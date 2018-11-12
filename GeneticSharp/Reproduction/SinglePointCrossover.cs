@@ -9,7 +9,7 @@ namespace GeneticSharp.Reproduction
         {
         }
 
-        protected override T ChooseChromosomeGiver(PropertyInfo chromosome, int index, T parentA, T parentB)
+        protected override T ChooseGeneGiver(PropertyInfo gene, int index, T parentA, T parentB)
         {
             var crossoverPoint = GetCrossoverPoint(parentA, parentB).First(); // it has just one crossover cut point
             return index <= crossoverPoint ? parentA : parentB;
