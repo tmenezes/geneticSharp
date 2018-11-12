@@ -9,12 +9,12 @@ using GeneticSharp.Helpers;
 
 namespace GeneticSharp.Mutation
 {
-    public class RandomMutator<T> where T : class, new()
+    public class UniformMutator<T> where T : class, new()
     {
         private readonly EvolutionOptions _options;
         private readonly Builder<T> _builder;
 
-        public RandomMutator(EvolutionOptions options)
+        public UniformMutator(EvolutionOptions options)
         {
             _options = options;
             _builder = options.GenerateBuilder<T>();
