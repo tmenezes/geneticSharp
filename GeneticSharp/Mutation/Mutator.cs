@@ -1,4 +1,5 @@
 ﻿using System;
+using GeneticSharp.Extensions;
 
 namespace GeneticSharp.Mutation
 {
@@ -6,7 +7,7 @@ namespace GeneticSharp.Mutation
     {
         public static Population<T> Mutate<T>(Population<T> population, EvolutionOptions options) where T : class, IEvolutionaryIndividual, new()
         {
-            var mutator = new UniformMutation<T>(options);
+            var mutator = options.GetMutation<T>();
 
             foreach (var individual in population)
             {

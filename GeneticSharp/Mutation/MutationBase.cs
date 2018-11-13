@@ -9,6 +9,19 @@ using GeneticSharp.Helpers;
 
 namespace GeneticSharp.Mutation
 {
+    public enum MutationTypes
+    {
+        /// <summary>
+        /// Performs mutation by randomly generating new gene value
+        /// </summary>
+        Uniform,
+
+        /// <summary>
+        /// Add or subtract a small number from the current gene value
+        /// </summary>
+        Addition,
+    }
+
     public abstract class MutationBase<T> where T : class, new()
     {
         private readonly EvolutionOptions _options;

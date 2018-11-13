@@ -1,3 +1,4 @@
+using GeneticSharp.Mutation;
 using GeneticSharp.Reproduction;
 using GeneticSharp.Selection;
 
@@ -13,6 +14,7 @@ namespace GeneticSharp
         public CrossoverTypes Crossover { get; set; } = CrossoverTypes.Uniform;
 
         public double MutationRate { get; set; } = 0.01;
+        public MutationTypes Mutation { get; set; } = MutationTypes.Uniform;
 
         public int CollectionSize { get; set; } = 10;
         public int MinNumberValue { get; set; } = 0;

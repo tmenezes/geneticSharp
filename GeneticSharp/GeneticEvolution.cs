@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GeneticSharp.Extensions;
 using GeneticSharp.Mutation;
 using GeneticSharp.Reproduction;
 using GeneticSharp.Selection;
@@ -70,11 +71,8 @@ namespace GeneticSharp
         {
             population.ToList().ForEach(i => i.CalculateFitness());
 
-            var selector = _options.NaturalSelection == SelectionTypes.Truncate
-                    ? new TruncateSelection<T>(_options.NaturalSelectionRate)
-                    : new ProportionalSelection<T>(_options.NaturalSelectionRate) as INaturalSelection<T>;
-
-            return selector.Select(population);
+            return _options.GetSelection<T>()
+                           .Select(population);
         }
 
         private Population<T> Reproduce(Population<T> population)

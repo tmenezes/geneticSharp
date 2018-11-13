@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -27,7 +26,7 @@ namespace GeneticSharp.Tests
             Evolve<FindSecretSentenceModel>(options: options, stopCondition: r =>
             {
                 return r.BestIndividual.Fitness == 100; // stop when achieve 100% fitness
-            }); 
+            });
         }
     }
 
@@ -37,14 +36,14 @@ namespace GeneticSharp.Tests
 
         private decimal _fitness = 0;
 
-        public List<int> Sentence { get; set; }
+        public int[] Sentence { get; set; }
 
         public decimal Fitness => _fitness;
 
         public void CalculateFitness()
         {
             var matchedChars = 0;
-            for (int i = 0; i < Sentence.Count; i++)
+            for (int i = 0; i < Sentence.Length; i++)
             {
                 matchedChars += Sentence[i] == SECRET[i] ? 1 : 0;
             }
