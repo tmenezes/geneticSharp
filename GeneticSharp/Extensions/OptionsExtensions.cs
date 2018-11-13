@@ -27,5 +27,10 @@ namespace GeneticSharp.Extensions
                     return new UniformCrossover<T>(options);
             }
         }
+
+        internal static bool IsInRange(this EvolutionOptions options, decimal value)
+        {
+            return value >= options.MinNumberValue && value <= options.MaxNumberValue;
+        }
     }
 }
