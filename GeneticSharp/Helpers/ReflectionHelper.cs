@@ -18,5 +18,7 @@ namespace GeneticSharp.Helpers
         public static bool IsCollection(PropertyInfo property) => IsCollection(property.PropertyType);
 
         public static bool IsCollection(Type type) => _isCollection.GetOrAdd(type, TypeManager.IsCollection);
+
+        public static Type GetCollectionItemType(Type type) => TypeManager.GetCollectionItemType(type);
     }
 }

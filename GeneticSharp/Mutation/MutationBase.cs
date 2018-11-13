@@ -39,7 +39,7 @@ namespace GeneticSharp.Mutation
             var genes = GetGenesNormalizedSizes();
 
             var genesToChange = _options.MutationRate * genes.Count;
-            genesToChange = genesToChange <= 0 ? 1 : genesToChange;
+            genesToChange = genesToChange < 1 ? 1 : genesToChange;
 
             for (int i = 0; i < genesToChange; i++)
             {

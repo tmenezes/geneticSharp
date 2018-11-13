@@ -1,6 +1,7 @@
 using System.Reflection;
 using AutoBuilder.Helpers;
 using GeneticSharp.Extensions;
+using GeneticSharp.Helpers;
 
 namespace GeneticSharp.Mutation
 {
@@ -16,16 +17,18 @@ namespace GeneticSharp.Mutation
 
         protected override object MutateGene(PropertyInfo gene, int index, object originalValue, object suggestedRandomValue)
         {
-            if (Mutator.TryGetValue(originalValue, out var value))
+            if (NumberHelper.TryGetValue(originalValue, out var value))
             {
                 var addValue = (value * ADD_RATE) * (decimal)RandomData.GetDouble(); // something around 10% (ADD_RATE), then a random fraction of it
                 var shouldAdd = RandomData.GetBool(); // add or subtract
 
                 var result = shouldAdd
-                                 ? value + addValue
-                                 : value - addValue;
+                    ? value + addValue
+                    : value - addValue;
 
-                return _options.IsInRange(result) ? result : suggestedRandomValue;
+                return _options.IsInRange(result)
+                    ? NumberHelper.CastValueToProperType(gene.PropertyType, result)
+                    : suggestedRandomValue;
             }
             else
             {

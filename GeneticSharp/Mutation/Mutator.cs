@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using GeneticSharp.Extensions;
+using GeneticSharp.Helpers;
 
 namespace GeneticSharp.Mutation
 {
@@ -26,20 +28,6 @@ namespace GeneticSharp.Mutation
             catch (Exception)
             {
                 fallbackAction();
-            }
-        }
-
-        internal static bool TryGetValue(object input, out decimal value)
-        {
-            try
-            {
-                value = Convert.ToDecimal(input);
-                return true;
-            }
-            catch (Exception)
-            {
-                value = 0;
-                return false;
             }
         }
     }
