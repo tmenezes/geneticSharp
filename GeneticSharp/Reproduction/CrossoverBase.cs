@@ -32,7 +32,6 @@ namespace GeneticSharp.Reproduction
         protected CrossoverBase(EvolutionOptions options)
         {
             Builder = options.GenerateBuilder<T>();
-
         }
 
         // main method
