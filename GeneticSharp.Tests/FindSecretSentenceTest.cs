@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using GeneticSharp.Mutation;
 using Xunit;
 using Xunit.Abstractions;
@@ -37,11 +36,9 @@ namespace GeneticSharp.Tests
     {
         public const string SECRET = "Genetic algorithms are awesome! :)";
 
-        private decimal _fitness = 0;
+        public char[] Sentence { get; set; }
 
-        public int[] Sentence { get; set; }
-
-        public decimal Fitness => _fitness;
+        public decimal Fitness { get; private set; }
 
         public void CalculateFitness()
         {
@@ -51,12 +48,12 @@ namespace GeneticSharp.Tests
                 matchedChars += Sentence[i] == SECRET[i] ? 1 : 0;
             }
 
-            _fitness = matchedChars * 100 / SECRET.Length;
+            Fitness = matchedChars * 100 / SECRET.Length;
         }
 
         public override string ToString()
         {
-            var sentence = Sentence.Select(c => Convert.ToChar(c).ToString()).Aggregate((one, two) => $"{one}{two}");
+            var sentence = Sentence.Select(c => c.ToString()).Aggregate((one, two) => $"{one}{two}");
 
             return $"{nameof(Fitness)}: {Fitness}%: {sentence}";
         }
