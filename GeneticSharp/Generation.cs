@@ -1,5 +1,4 @@
 using System.Linq;
-using AutoBuilder;
 using GeneticSharp.Extensions;
 
 namespace GeneticSharp

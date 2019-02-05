@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GeneticSharp.Extensions;
 using GeneticSharp.Mutation;
 using GeneticSharp.Reproduction;
-using GeneticSharp.Selection;
 
 namespace GeneticSharp
 {
+    public delegate void IndividualEvolutionEventHandler<T>(T individual, Generation<T> generation) where T : class, IEvolutionaryIndividual, new();
+    public delegate void GenerationEvolutionEventHandler<T>(EvolutionResult<T> generationResult) where T : class, IEvolutionaryIndividual, new();
+
     public class GeneticEvolution<T> where T : class, IEvolutionaryIndividual, new()
     {
         private readonly EvolutionOptions _options;
         private readonly List<Generation<T>> _generations = new List<Generation<T>>();
+
+        public event IndividualEvolutionEventHandler<T> BeforeNaturalSelection;
+        public event IndividualEvolutionEventHandler<T> AfterNaturalSelection;
+        public event GenerationEvolutionEventHandler<T> GenerationEvolved;
 
         public IEnumerable<Generation<T>> Generations => _generations;
         public Generation<T> CurrentGeneration { get; private set; }
@@ -36,7 +41,7 @@ namespace GeneticSharp
             SwitchGenerations();
 
             // perform evolution
-            var naturalSelected = Select(CurrentGeneration.Population);
+            var naturalSelected = Select(CurrentGeneration);
             var newIndividuals = Reproduce(naturalSelected);
             var nextPopulation = Mutate(newIndividuals);
 
@@ -44,7 +49,10 @@ namespace GeneticSharp
             NextGeneration = new Generation<T>(CurrentGeneration.Number + 1, nextPopulation);
 
             // result of current generation
-            return new EvolutionResult<T>(CurrentGeneration);
+            var result = new EvolutionResult<T>(CurrentGeneration);
+            GenerationEvolved?.Invoke(result);
+
+            return result;
         }
 
         public IEnumerable<EvolutionResult<T>> EvolveUntil(Func<EvolutionResult<T>, bool> stopCondition, Func<EvolutionResult<T>, bool> onGenerationProcessed = null)
@@ -67,12 +75,19 @@ namespace GeneticSharp
         }
 
         // privates
-        private Population<T> Select(Population<T> population)
+        private Population<T> Select(Generation<T> generation)
         {
-            population.ToList().ForEach(i => i.CalculateFitness());
+            foreach (var individual in generation.Population)
+            {
+                BeforeNaturalSelection?.Invoke(individual, generation);
+
+                individual.CalculateFitness();
+
+                AfterNaturalSelection?.Invoke(individual, generation);
+            }
 
             return _options.GetSelection<T>()
-                           .Select(population);
+                           .Select(generation.Population);
         }
 
         private Population<T> Reproduce(Population<T> population)

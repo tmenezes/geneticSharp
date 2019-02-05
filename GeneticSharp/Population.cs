@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GeneticSharp.Mutation;
-using GeneticSharp.Reproduction;
-using GeneticSharp.Selection;
 
 namespace GeneticSharp
 {
@@ -14,7 +11,7 @@ namespace GeneticSharp
         public Population(IEnumerable<T> individuals)
         {
             _individuals = individuals;
-        }       
+        }
 
         public T GetBest() => _individuals.OrderByDescending(i => i.Fitness).First();
         public T GetWorst() => _individuals.OrderBy(i => i.Fitness).First();
