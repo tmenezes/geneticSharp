@@ -1,12 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Authors>Tmenezes</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <Authors>Thiago Menezes</Authors>
     <Description>GeneticSharp is a library that handles the mecanics of a generic algorithm implementation. It automatically creates the population, the reproduction and mutation phases.</Description>
     <RepositoryUrl>https://github.com/tmenezes/geneticSharp</RepositoryUrl>
     <PackageTags>geneticAlgorithm, GA, AI</PackageTags>
     <PackageProjectUrl>https://github.com/tmenezes/geneticSharp</PackageProjectUrl>
+    <Company />
+    <PackageId>GeneticSharpCore</PackageId>
+    <Product>GeneticSharpCore</Product>
   </PropertyGroup>
 
   <ItemGroup>

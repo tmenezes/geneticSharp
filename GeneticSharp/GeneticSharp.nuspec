@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>GeneticSharpCore</id>
+    <version>1.0.0</version>
+    <title>GeneticSharp for .Net Core</title>
+    <authors>Thiago Menezes</authors>
+    <owners>Thiago Menezes</owners>
+	<projectUrl>https://github.com/tmenezes/geneticSharp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>GeneticSharp is a library that handles the mechanism of a generic algorithm implementation. It automatically creates the population, the reproduction and mutation phases.</description>
+    <dependencies>      
+      <group targetFramework=".NETStandard1.6">
+        <dependency id="NETStandard.Library" version="1.6.0" />
+        <dependency id="System.Linq" version="4.1.0" />
+        <dependency id="AutoBuilderCore" version="1.1.2" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin/Release/netstandard1.6/GeneticSharp.dll" target="lib\netstandard1.6" />
+  </files>
+</package>

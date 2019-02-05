@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticSharp", "GeneticSharp\GeneticSharp.csproj", "{84E85070-4EF3-410F-BA4E-503EE59B438B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneticSharp", "GeneticSharp\GeneticSharp.csproj", "{84E85070-4EF3-410F-BA4E-503EE59B438B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneticSharp.Tests", "GeneticSharp.Tests\GeneticSharp.Tests.csproj", "{CC428451-3FC7-426D-B872-2588821111D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneticSharp.Tests", "GeneticSharp.Tests\GeneticSharp.Tests.csproj", "{CC428451-3FC7-426D-B872-2588821111D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {082894B1-C85F-42E5-867D-AA3EB5081D30}
 	EndGlobalSection
 EndGlobal
