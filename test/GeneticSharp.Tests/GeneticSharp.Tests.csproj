@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeneticSharp\GeneticSharp.csproj" />
+    <ProjectReference Include="..\..\src\GeneticSharp\GeneticSharp.csproj" />
   </ItemGroup>
 
 </Project>
