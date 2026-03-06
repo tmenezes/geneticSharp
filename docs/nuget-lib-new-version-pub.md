@@ -82,6 +82,6 @@ https://www.nuget.org/packages/GeneticSharpCore
 
 | Version | Notes                  |
 |---------|------------------------|
-| 1.0.2   | Patch version update   |
+| 1.1.0   | Minor version update   |
 | 1.0.1   | Previous release       |
 | 1.0.0   | Initial release        |
