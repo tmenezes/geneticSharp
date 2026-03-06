@@ -10,8 +10,8 @@
     <Company />
     <PackageId>GeneticSharpCore</PackageId>
     <Product>GeneticSharpCore</Product>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <Version>1.0.1</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
