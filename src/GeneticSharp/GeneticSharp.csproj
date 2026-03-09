@@ -5,17 +5,22 @@
     <Authors>Thiago Menezes</Authors>
     <Description>GeneticSharp is a library that handles the mechanism of a generic algorithm implementation. It automatically creates the population, the reproduction and mutation phases.</Description>
     <RepositoryUrl>https://github.com/tmenezes/geneticSharp</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>geneticAlgorithm, GA, AI</PackageTags>
     <PackageProjectUrl>https://github.com/tmenezes/geneticSharp</PackageProjectUrl>
     <Company />
     <PackageId>GeneticSharpCore</PackageId>
     <Product>GeneticSharpCore</Product>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoBuilderCore" Version="1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
